@@ -3,7 +3,7 @@ import random
 number = random.randint(-10000, 10000)
 
 # Get the last digit of number by using modulo 10
-last_digit = abs(number) % 10
+last_digit = number % 10
 
 # Print the first part of the message
 print(f"Last digit of {number} is", end=" ")
