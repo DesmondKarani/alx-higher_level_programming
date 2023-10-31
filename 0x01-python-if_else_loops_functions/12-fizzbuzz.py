@@ -2,7 +2,7 @@
 
 def fizzbuzz():
     for number in range(1, 101):  # Numbers from 1 to 100
-        if number % 3 == 0 and number % 5 == 0:  # Multiples of both three and five
+        if number % 3 == 0 and number % 5 == 0:  # Multiples of three and five
             print("FizzBuzz", end=' ')
         elif number % 3 == 0:  # Multiples of three
             print("Fizz", end=' ')
