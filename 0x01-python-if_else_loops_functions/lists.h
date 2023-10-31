@@ -1,6 +1,9 @@
 #ifndef LISTS_H
 #define LISTS_H
 
+#include <stdlib.h>  /* Includes malloc */
+#include <stddef.h>  /* Includes size_t and NULL */
+
 /**
  * struct listint_s - singly linked list
  * @n: integer
