@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Get the source filename from the environment variable
+source=$PYFILE
+
+# Generate the output filename by adding 'c' at the end
+output=$PYFILE"c"
+
+# Compile the source file to the output file
+python -m py_compile -o $output $source
