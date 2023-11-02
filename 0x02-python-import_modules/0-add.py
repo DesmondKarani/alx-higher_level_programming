@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-import add_0 as desmond
+from add_0 import add
 a = 1
 b = 2
-result = desmond.add(a, b)
+result = add(a, b)
 print("{} + {} = {}". format(a, b, result))
