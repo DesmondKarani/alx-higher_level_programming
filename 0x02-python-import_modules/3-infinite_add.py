@@ -5,3 +5,5 @@ if __name__ == "__main__":
     def main():
         sum_of_args = sum(int(arg) for arg in sys.argv[1:])
         print(sum_of_args)
+
+main()
