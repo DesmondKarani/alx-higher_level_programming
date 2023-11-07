@@ -1,77 +1,53 @@
 #include "lists.h"
-#include <stddef.h>
 
 /**
- * reverse_listint - Reverses a listint_t linked list.
- * @head: A pointer to the start of the listint_t.
- * Return: A pointer to the first node of the reversed list.
- */
-listint_t *reverse_listint(listint_t **head)
-{
-	listint_t *node = *head, *next, *prev = NULL;
-
-	while (node != NULL)
-	{
-		next = node->next;
-		node->next = prev;
-		prev = node;
-		node = next;
-	}
-
-	*head = prev;
-	return (*head);
-}
-
-/**
- * compare_lists - Compares two halves of a list.
- * @first_half: A pointer to the start of the first half.
- * @second_half: A pointer to the start of the second half.
- * Return: 1 if both halves are equal, 0 otherwise.
- */
-int compare_lists(listint_t *first_half, listint_t *second_half)
-{
-	while (second_half != NULL)
-	{
-		if (first_half->n != second_half->n)
-			return (0);
-		first_half = first_half->next;
-		second_half = second_half->next;
-	}
-	return (1);
-}
-
-/**
- * is_palindrome - Checks if a singly linked list is a palindrome.
- * @head: Double pointer to the beginning of the list.
- * Return: 1 if it is a palindrome, 0 if not.
- * An empty list is considered a palindrome.
+ * is_palindrome - checks if a singly linked list is a palindrome
+ * @head: pointer to the head of the list
+ * Return: 0 if it is not a palindrome, 1 if it is a palindrome
  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *fast = *head, *slow = *head;
-	listint_t *first_half, *second_half, *temp = NULL;
+	listint_t *slow = *head, *fast = *head;
+	listint_t *prev = NULL, *next = NULL;
+	int result = 1;
 
-	if (*head == NULL || (*head)->next == NULL)
+	if (head == NULL || *head == NULL) /* empty list is a palindrome */
 		return (1);
-
-	while (fast != NULL && fast->next != NULL)
+	/* find the middle node of the list using slow and fast pointers */
+	while (fast && fast->next)
 	{
 		fast = fast->next->next;
-		temp = slow;
 		slow = slow->next;
 	}
-
-	if (fast != NULL)
+	/* reverse the second half of the list */
+	while (slow)
+	{
+		next = slow->next;
+		slow->next = prev;
+		prev = slow;
+		slow = next;
+	}
+	/* compare the first and second half of the list */
+	slow = prev; /* slow now points to the last node */
+	fast = *head; /* fast now points to the first node */
+	while (slow)
+	{
+		if (slow->n != fast->n) /* mismatch found */
+		{
+			result = 0;
+			break;
+		}
 		slow = slow->next;
-
-	second_half = reverse_listint(&slow);
-	first_half = *head;
-
-	int is_pali = compare_lists(first_half, second_half);
-
-	reverse_listint(&second_half);
-
-	if (temp != NULL)
-		temp->next = second_half;
-	return (is_pali);
+		fast = fast->next;
+	}
+	/* restore the original list by reversing the second half again */
+	prev = NULL;
+	while (slow)
+	{
+		next = slow->next;
+		slow->next = prev;
+		prev = slow;
+		slow = next;
+	}
+	return (result);
 }
