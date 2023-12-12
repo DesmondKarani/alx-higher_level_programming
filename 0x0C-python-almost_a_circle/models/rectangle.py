@@ -90,8 +90,8 @@ class Rectangle(Base):
 
     def __str__(self):
         """Return the string representation of the Rectangle."""
-        return f"[Rectangle]({self.id}) {self.x}/{self.y}
-    - {self.width}/{self.height}"
+        return (f"[Rectangle]({self.id}) {self.x}/{self.y} - "
+                f"{self.width}/{self.height}")
 
     def update(self, *args, **kwargs):
         """Update the Rectangle attributes."""
@@ -99,8 +99,7 @@ class Rectangle(Base):
             attributes = ['id', 'width', 'height', 'x', 'y']
             for attr, value in zip(attributes, args):
                 setattr(self, attr, value)
-
-            else:
-                for key, value in kwargs.items():
-                    if hasattr(self, key):
-                        setattr(self, key, value)
+        else:
+            for key, value in kwargs.items():
+                if hasattr(self, key):
+                    setattr(self, key, value)
