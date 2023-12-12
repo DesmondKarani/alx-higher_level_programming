@@ -75,3 +75,32 @@ class Rectangle(Base):
     def area(self):
         """Return the area of the Rectangle."""
         return self.width * self.height
+
+    def display(self):
+        """Print the Rectangle instance using the '#' character,
+        considering x and y."""
+        # Print new lines for 'y' offset
+        print("\n" * self.y, end="")
+
+        # Print each row of the rectangle
+        for _ in range(self.height):
+            # 'x' offset: print spaces before the '#'
+            print(" " * self.x, end="")
+            print("#" * self.width)
+
+    def __str__(self):
+        """Return the string representation of the Rectangle."""
+        return f"[Rectangle]({self.id}) {self.x}/{self.y}
+    - {self.width}/{self.height}"
+
+    def update(self, *args, **kwargs):
+        """Update the Rectangle attributes."""
+        if args and len(args) > 0:
+            attributes = ['id', 'width', 'height', 'x', 'y']
+            for attr, value in zip(attributes, args):
+                setattr(self, attr, value)
+
+            else:
+                for key, value in kwargs.items():
+                    if hasattr(self, key):
+                        setattr(self, key, value)
