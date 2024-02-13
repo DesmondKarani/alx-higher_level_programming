@@ -1,8 +1,8 @@
 #!/usr/bin/node
 
 class Rectangle {
-  constructor(w, h) {
-    if (Number.isInteger(w) && w > 0 && Number.isInteger(h) && h > 0) {
+  constructor (w, h) {
+    if (Number.isInteger (w) && w > 0 && Number.isInteger (h) && h > 0) {
       this.width = w;
       this.height = h;
     } else {
@@ -11,17 +11,17 @@ class Rectangle {
     }
   }
 
-  print() {
+  print () {
     for (let i = 0; i < this.height; i++) {
-      console.log('X'.repeat(this.width));
+      console.log ('X'.repeat (this.width));
     }
   }
 
-  rotate() {
+  rotate () {
     [this.width, this.height] = [this.height, this.width];
   }
 
-  double() {
+  double () {
     this.width *= 2;
     this.height *= 2;
   }
