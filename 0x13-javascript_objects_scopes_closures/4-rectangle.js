@@ -2,7 +2,7 @@
 
 class Rectangle {
   constructor (w, h) {
-    if (Number.isInteger (w) && w > 0 && Number.isInteger (h) && h > 0) {
+    if (Number.isInteger(w) && w > 0 && Number.isInteger(h) && h > 0) {
       this.width = w;
       this.height = h;
     } else {
@@ -13,7 +13,7 @@ class Rectangle {
 
   print () {
     for (let i = 0; i < this.height; i++) {
-      console.log('X'.repeat (this.width));
+      console.log('X'.repeat(this.width));
     }
   }
 
