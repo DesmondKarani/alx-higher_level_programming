@@ -1,11 +1,13 @@
 #!/usr/bin/node
-// Assuming the update is made in a new file or the existing Square class
+
+const Rectangle = require('./4-rectangle');
+
 class Square extends Rectangle {
-  constructor(size) {
+  constructor (size) {
     super(size, size);
   }
 
-  charPrint(c) {
+  charPrint (c) {
     if (c === undefined) {
       c = 'X';
     }
