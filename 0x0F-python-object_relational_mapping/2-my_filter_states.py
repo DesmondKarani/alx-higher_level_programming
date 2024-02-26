@@ -13,7 +13,8 @@ import sys
 def filter_states_by_user_input(username, password, dbname, state_name):
     """
     Connects to a MySQL database and lists all states where the name matches
-    the user-provided state name, sorted in ascending order by id.
+    the user-provided state name exactly, including case,
+    sorted in ascending order by id.
     """
     db = MySQLdb.connect(
         host="localhost",
@@ -23,16 +24,11 @@ def filter_states_by_user_input(username, password, dbname, state_name):
         db=dbname
     )
     cur = db.cursor()
-    query = (
-            "SELECT * FROM states"
-            "WHERE name = '{}'"
-            "ORDER BY id ASC"
-            ).format(state_name)
-    cur.execute(query)
+    query = "SELECT * FROM states WHERE BINARY name = %s ORDER BY id ASC"
+    cur.execute(query, (state_name,))
     query_rows = cur.fetchall()
     for row in query_rows:
-        if row[1] == state_name:
-            print(row)
+        print(row)
     cur.close()
     db.close()
 
