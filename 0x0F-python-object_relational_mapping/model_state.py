@@ -8,6 +8,13 @@ Base = declarative_base()
 
 
 class State(Base):
+    """Definition of the State class.
+
+    This class represents a state in the 'states' table of a MySQL database,
+    with an auto-generated, unique 'id' as a primary key and a 'name' attribute
+    that stores the name of the state, which cannot
+    be null and is limited to 128 characters.
+    """
     __tablename__ = 'states'
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     name = Column(String(128), nullable=False)
