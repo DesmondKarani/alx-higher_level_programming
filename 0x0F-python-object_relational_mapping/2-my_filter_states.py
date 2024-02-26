@@ -10,34 +10,24 @@ import MySQLdb
 import sys
 
 
-def filter_states_by_user_input(username, password, dbname, state_name):
-    """
-    Connects to a MySQL database and lists all states where the name matches
-    the user-provided state name exactly, including case,
-    sorted in ascending order by id.
-    """
-    db = MySQLdb.connect(
-        host="localhost",
-        port=3306,
-        user=username,
-        passwd=password,
-        db=dbname
-    )
-    cur = db.cursor()
-    query = "SELECT * FROM states WHERE BINARY name = %s ORDER BY id ASC"
-    cur.execute(query, (state_name,))
-    query_rows = cur.fetchall()
-    for row in query_rows:
+def main():
+    """Main function to list states from the database."""
+    # Establish database connection
+    connection = MySQLdb.connect(host="localhost", user=sys.argv[1],
+                                 passwd=sys.argv[2], db=sys.argv[3], port=3306)
+    # Create cursor
+    cursor = connection.cursor()
+    # Execute query
+    state_name = sys.argv[4]
+    query = "SELECT * FROM states WHERE name LIKE BINARY %s"
+    cursor.execute(query, (state_name,))
+    # Fetch and print all rows
+    for row in cursor.fetchall():
         print(row)
-    cur.close()
-    db.close()
+    # Close cursor and connection
+    cursor.close()
+    connection.close()
 
 
 if __name__ == "__main__":
-    if len(sys.argv) == 5:
-        filter_states_by_user_input(
-                sys.argv[1],
-                sys.argv[2],
-                sys.argv[3],
-                sys.argv[4]
-                )
+    main()
