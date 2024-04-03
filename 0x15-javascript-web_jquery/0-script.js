@@ -1,5 +1,4 @@
-// Select the <header> element using document.querySelector
+//  a JavaScript script that updates the text color of the <header> element to red (#FF0000)
 const header = document.querySelector('header');
 
-// Update the text color of the selected <header> element to red (#FF0000)
 header.style.color = '#FF0000';
